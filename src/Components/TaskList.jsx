@@ -6,27 +6,27 @@ function TaskList() {
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/tasks")
+    axios.get("https://todolistbackend-sld9.onrender.com/api/tasks")
       .then((res) => setTasks(res.data))
       .catch((err) => console.error(err));
   }, []);
 
   const addTask = () => {
     if (!newTask.trim()) return;
-    axios.post("http://localhost:5000/api/tasks", { title: newTask })
+    axios.post("https://todolistbackend-sld9.onrender.com/api/tasks", { title: newTask })
       .then((res) => setTasks([...tasks, res.data]))
       .catch((err) => console.error(err));
     setNewTask("");
   };
 
   const deleteTask = (id) => {
-    axios.delete(`http://localhost:5000/api/tasks/${id}`)
+    axios.delete(`https://todolistbackend-sld9.onrender.com/api/tasks/${id}`)
       .then(() => setTasks(tasks.filter((task) => task._id !== id)))
       .catch((err) => console.error(err));
   };
 
   const toggleCompletion = (id, completed) => {
-    axios.put(`http://localhost:5000/api/tasks/${id}`, { completed: !completed })
+    axios.put(`https://todolistbackend-sld9.onrender.com/api/tasks/${id}`, { completed: !completed })
       .then((res) => {
         setTasks(tasks.map((task) => (task._id === id ? res.data : task)));
       })
